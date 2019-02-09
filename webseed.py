@@ -21,7 +21,7 @@ def index(request):
     id = request.GET.get("id")
     headers = {'Authorization': "Bearer {}".format(KEY)}
     data = {'url':"https://1fichier.com/?{}".format(id),'inline':1}
-    res = requests.post(API_URL,data=data, headers=headers)
+    res = requests.post(API_URL,json=data, headers=headers)
     res_json = res.json()
     url = res_json.get("url")
     if url:
@@ -39,4 +39,4 @@ urlpatterns = [
 # $ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django
 
 # for example run with uwsgi
-# `$ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=pico_django -w "django.core.handlers.wsgi:WSGIHandler()"`
+# `$ uwsgi --http :8000 -M --pythonpath=. --env CACHE=REDIS --env DJANGO_SETTINGS_MODULE=webseed -w "django.core.handlers.wsgi:WSGIHandler()"`
