@@ -5,7 +5,9 @@ import requests_cache
 import os
 import json
 
-requests_cache.install_cache('webseed_cache')
+rcache=os.environ.get("CACHE", "sqlite")
+
+requests_cache.install_cache('webseed_cache', backend=rcache)
 DEBUG = True
 ROOT_URLCONF = 'webseed'
 ALLOWED_HOSTS = '*'
